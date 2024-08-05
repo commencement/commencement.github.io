@@ -118,29 +118,43 @@
     }
   </style>
 
-<script>
-  // 获取GitHub仓库的星标数
-  async function fetchGitHubStars(repo, elementId) {
-    try {
-      const response = await fetch(`https://api.github.com/repos/${repo}`);
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-      const data = await response.json();
-      const stars = data.stargazers_count;
-      document.getElementById(elementId).textContent = `⭐ ${stars}`;
-    } catch (error) {
-      console.error('Error fetching GitHub stars:', error);
-    }
-  }
+    <script>
+        // 获取GitHub仓库的星标数
+        async function fetchGitHubStars(repo, elementId) {
+            try {
+                const response = await fetch(`https://api.github.com/repos/${repo}`);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                const data = await response.json();
+                const stars = data.stargazers_count;
+                document.getElementById(elementId).textContent = `⭐ ${stars}`;
+            } catch (error) {
+                console.error('Error fetching GitHub stars:', error);
+            }
+        }
 
-  // 在页面加载时调用函数
-  document.addEventListener('DOMContentLoaded', () => {
-    fetchGitHubStars('infly-ai/INF-LLM', 'inf-llm-stars');
-    // 你可以在这里为其他GitHub仓库添加更多调用
-    // fetchGitHubStars('other-repo/another-repo', 'another-element-id');
-  });
-</script>
+        // 获取Hugging Face模型的下载次数
+        async function fetchHuggingFaceDownloads(model, elementId) {
+            try {
+                const response = await fetch(`https://huggingface.co/api/models/${model}`);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                const data = await response.json();
+                const downloads = data.downloads || 0;
+                document.getElementById(elementId).textContent = `⬇️ ${downloads}`;
+            } catch (error) {
+                console.error('Error fetching Hugging Face downloads:', error);
+            }
+        }
+
+        // 在页面加载时调用函数
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchGitHubStars('infly-ai/INF-LLM', 'inf-llm-stars');
+            fetchHuggingFaceDownloads('infly/INF-34B-Base', 'inf-34b-downloads');
+        });
+    </script>
 
 </head>
 
@@ -204,7 +218,9 @@
           |
           <a href="https://huggingface.co/infly/INF-34B-Base" target="_blank">
             <img src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg" alt="HuggingFace" style="width: 16px; height: 16px; vertical-align: middle;"> HuggingFace
-          </a> |
+          </a> 
+          <span id="inf-34b-downloads"></span>
+          |
           <a href="https://s.infly.cn/f/img/pdf/inf_34b_tech_report.pdf" target="_blank">
             <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" alt="Tech Report" style="width: 16px; height: 16px; vertical-align: middle;"> Tech Report
           </a>
