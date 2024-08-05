@@ -158,6 +158,7 @@
 
         // 在页面加载时调用函数
         document.addEventListener('DOMContentLoaded', () => {
+            fetchHuggingFaceDownloads('infly/INF-34B-Base', 'inf-34b-downloads');
             fetchGitHubStars('infly-ai/INF-LLM', 'inf-llm-stars');
             fetchGitHubStars('Bumble666/Hyper_MoE', 'hyper-moe-stars');
             fetchGitHubStars('mutonix/RefGPT', 'ref-gpt-stars');
