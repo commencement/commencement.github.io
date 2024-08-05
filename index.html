@@ -118,56 +118,59 @@
     }
   </style>
 
-    <script>
-        // 请将你的GitHub个人访问令牌替换为'YOUR_GITHUB_TOKEN'
-        const GITHUB_TOKEN = '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';
+  <script>
+    // 请将你的GitHub个人访问令牌替换为'YOUR_GITHUB_TOKEN'
+    const GITHUB_TOKEN = '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';  // 确保此令牌是有效的并已设置相应权限
 
-        // 获取GitHub仓库的星标数
-        async function fetchGitHubStars(repo, elementId) {
-            try {
-                const response = await fetch(`https://api.github.com/repos/${repo}`, {
-                    headers: {
-                        'Authorization': `token ${GITHUB_TOKEN}`
-                    }
-                });
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
+    // 获取GitHub仓库的星标数
+    async function fetchGitHubStars(repo, elementId) {
+        try {
+            const response = await fetch(`https://api.github.com/repos/${repo}`, {
+                headers: {
+                    'Authorization': `token ${GITHUB_TOKEN}`
                 }
-                const data = await response.json();
-                const stars = data.stargazers_count;
-                document.getElementById(elementId).textContent = `⭐ ${stars}`;
-            } catch (error) {
-                console.error('Error fetching GitHub stars:', error);
+            });
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
             }
+            const data = await response.json();
+            const stars = data.stargazers_count;
+            document.getElementById(elementId).textContent = `⭐ ${stars}`;
+        } catch (error) {
+            console.error('Error fetching GitHub stars:', error);
+            document.getElementById(elementId).textContent = '⭐ Error';
         }
+    }
 
-        // 获取Hugging Face模型的下载次数
-        async function fetchHuggingFaceDownloads(model, elementId) {
-            try {
-                const response = await fetch(`https://huggingface.co/api/models/${model}`);
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-                const data = await response.json();
-                const downloads = data.downloads || 0;
-                document.getElementById(elementId).textContent = `⬇️ ${downloads}`;
-            } catch (error) {
-                console.error('Error fetching Hugging Face downloads:', error);
+    // 获取Hugging Face模型的下载次数
+    async function fetchHuggingFaceDownloads(model, elementId) {
+        try {
+            const response = await fetch(`https://huggingface.co/api/models/${model}`);
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
             }
+            const data = await response.json();
+            const downloads = data.downloads || 0;
+            document.getElementById(elementId).textContent = `⬇️ ${downloads}`;
+        } catch (error) {
+            console.error('Error fetching Hugging Face downloads:', error);
+            document.getElementById(elementId).textContent = '⬇️ Error';
         }
+    }
 
-        // 在页面加载时调用函数
-        document.addEventListener('DOMContentLoaded', () => {
-            fetchHuggingFaceDownloads('infly/INF-34B-Base', 'inf-34b-downloads');
-            fetchGitHubStars('infly-ai/INF-LLM', 'inf-llm-stars');
-            fetchGitHubStars('Bumble666/Hyper_MoE', 'hyper-moe-stars');
-            fetchGitHubStars('mutonix/RefGPT', 'ref-gpt-stars');
-            fetchGitHubStars('MikeGu721/XiezhiBenchmark', 'xiezhi-benchmark-stars');
-            fetchGitHubStars('WaitHZ/GW-MoE', 'gw-moe-stars');
-            fetchGitHubStars('kamanphoebe/Look-into-MoEs', 'look-into-moes-stars');
-            fetchGitHubStars('multimodal-art-projection/MAP-NEO', 'map-neo-stars');
-        });
-    </script>
+    // 在页面加载时调用函数
+    document.addEventListener('DOMContentLoaded', () => {
+        fetchHuggingFaceDownloads('infly/INF-34B-Base', 'inf-34b-downloads');
+        fetchGitHubStars('infly-ai/INF-LLM', 'inf-llm-stars');
+        fetchGitHubStars('Bumble666/Hyper_MoE', 'hyper-moe-stars');
+        fetchGitHubStars('mutonix/RefGPT', 'ref-gpt-stars');
+        fetchGitHubStars('MikeGu721/XiezhiBenchmark', 'xiezhi-benchmark-stars');
+        fetchGitHubStars('WaitHZ/GW-MoE', 'gw-moe-stars');
+        fetchGitHubStars('kamanphoebe/Look-into-MoEs', 'look-into-moes-stars');
+        fetchGitHubStars('multimodal-art-projection/MAP-NEO', 'map-neo-stars');
+    });
+</script>
+
 
 </head>
 
