@@ -201,20 +201,61 @@ Email: ziliwang.do@gmail.com</a><br>
 
 <h2 style="CLEAR: both;">Recent Projects</h2>
 
-<div class="model-info">
-    <p><strong>Model Announcement: INF-34B</strong></p>
-    <p>INF-34B has 34 billion parameters with a context window length of 32K, and is trained on about 3.5T well-processed tokens from English and Chinese bilingual corpus. Compared with open source models of the comparable size, INF-34B not only provides competitive performance in the OpenCompass evaluation, but also has impressive potential on both finance and healthcare domains. Besides, the quantized INF-34B runs on graphics cards of 24GB VRAM with negligible accuracy loss, which facilitates commercial applications, especially low-resource scenarios.</p>
-    <p>Links:
-        <a href="https://github.com/infly-ai/INF-LLM" target="_blank">GitHub</a> |
-        <a href="https://huggingface.co/infly/INF-34B-Base" target="_blank">HuggingFace</a> |
-        <a href="https://s.infly.cn/f/img/pdf/inf_34b_tech_report.pdf" target="_blank">Tech Report</a>
-    </p>
-</div>
+    <div class="model-info">
+        <p><strong>Model Announcement: INF-34B</strong></p>
+        <p>INF-34B has 34 billion parameters with a context window length of 32K, and is trained on about 3.5T well-processed tokens from English and Chinese bilingual corpus. Compared with open source models of the comparable size, INF-34B not only provides competitive performance in the OpenCompass evaluation, but also has impressive potential on both finance and healthcare domains. Besides, the quantized INF-34B runs on graphics cards of 24GB VRAM with negligible accuracy loss, which facilitates commercial applications, especially low-resource scenarios.</p>
+        <p>Links:
+            <a id="github-link" href="https://github.com/infly-ai/INF-LLM" target="_blank">GitHub</a> |
+            <a href="https://huggingface.co/infly/INF-34B-Base" target="_blank">HuggingFace</a> |
+            <a href="https://s.infly.cn/f/img/pdf/inf_34b_tech_report.pdf" target="_blank">Tech Report</a>
+        </p>
+        <div id="repo-info">
+            <!-- The repositories info will be dynamically inserted here -->
+        </div>
+    </div>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+const repoInfo = document.getElementById('repo-info');
+
+const repositories = [
+{ username: 'infly-ai', repository: 'INF-LLM', displayName: 'INF-LLM' },
+{ username: 'anotheruser', repository: 'anotherrepo', displayName: 'Another Repo' },
+// Add more repositories as needed
+];
+
+repositories.forEach(repo => {
+const url = `https://api.github.com/repos/${repo.username}/${repo.repository}`;
+
+fetch(url)
+    .then(response => response.json())
+    .then(data => {
+        const repoElement = document.createElement('p');
+        if (data.stargazers_count !== undefined) {
+            repoElement.innerHTML = `<a href="https://github.com/${repo.username}/${repo.repository}" target="_blank">${repo.displayName}</a>: ${data.stargazers_count} stars`;
+        } else {
+            repoElement.textContent = `Error fetching stars for ${repo.displayName}`;
+        }
+        repoInfo.appendChild(repoElement);
+    })
+    .catch(error => {
+        console.error('Error fetching data:', error);
+        const repoElement = document.createElement('p');
+        repoElement.textContent = `Error fetching stars for ${repo.displayName}`;
+        repoInfo.appendChild(repoElement);
+    });
+});
+});
+</script>
 <!-- =======================================================================!-->
 
 <div id="papers">
 <h2 style="CLEAR: both">Large Language Model Pretraining Related Publications </h2> 
 </br>
+
+
+
 
 
 <table>
