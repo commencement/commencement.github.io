@@ -117,6 +117,31 @@
       text-decoration: none; /* Remove underlines for a cleaner look */
     }
   </style>
+
+<script>
+  // 获取GitHub仓库的星标数
+  async function fetchGitHubStars(repo, elementId) {
+    try {
+      const response = await fetch(`https://api.github.com/repos/${repo}`);
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      const data = await response.json();
+      const stars = data.stargazers_count;
+      document.getElementById(elementId).textContent = `⭐ ${stars}`;
+    } catch (error) {
+      console.error('Error fetching GitHub stars:', error);
+    }
+  }
+
+  // 在页面加载时调用函数
+  document.addEventListener('DOMContentLoaded', () => {
+    fetchGitHubStars('infly-ai/INF-LLM', 'inf-llm-stars');
+    // 你可以在这里为其他GitHub仓库添加更多调用
+    // fetchGitHubStars('other-repo/another-repo', 'another-element-id');
+  });
+</script>
+
 </head>
 
 <body>
@@ -174,7 +199,9 @@
         <p>Links:
           <a href="https://github.com/infly-ai/INF-LLM" target="_blank">
             <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub" style="width: 16px; height: 16px; vertical-align: middle;"> GitHub
-          </a> |
+          </a> 
+          <span id="inf-llm-stars"></span>
+          |
           <a href="https://huggingface.co/infly/INF-34B-Base" target="_blank">
             <img src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg" alt="HuggingFace" style="width: 16px; height: 16px; vertical-align: middle;"> HuggingFace
           </a> |
