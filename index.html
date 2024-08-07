@@ -119,55 +119,77 @@
   </style>
 
 <script>
-    // 获取GitHub仓库的星标数
-    async function fetchGitHubStars(repo, elementId) {
-        try {
-            const response = await fetch(`https://api.github.com/repos/${repo}`);
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            const data = await response.json();
-            const stars = data.stargazers_count;
-            document.getElementById(elementId).textContent = `⭐ ${stars}`;
-        } catch (error) {
-            console.error('Error fetching GitHub stars:', error);
-            document.getElementById(elementId).textContent = '⭐ Error';
-        }
-    }
+// 缓存GitHub仓库的星标数
+const githubStarsCache = {};
 
-    // 获取Hugging Face模型的下载次数
-    async function fetchHuggingFaceDownloads(model, elementId) {
-        try {
-            const response = await fetch(`https://huggingface.co/api/models/${model}`);
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            const data = await response.json();
-            const downloads = data.downloads || 0;
-            document.getElementById(elementId).textContent = `⬇️ ${downloads}`;
-        } catch (error) {
-            console.error('Error fetching Hugging Face downloads:', error);
-            document.getElementById(elementId).textContent = '⬇️ Error';
+// 获取GitHub仓库的星标数
+async function fetchGitHubStars(repo, elementId) {
+    try {
+        if (githubStarsCache[repo]) {
+            document.getElementById(elementId).textContent = `⭐ ${githubStarsCache[repo]}`;
+            return;
         }
+        
+        const response = await fetch(`https://api.github.com/repos/${repo}`);
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        const stars = data.stargazers_count;
+        githubStarsCache[repo] = stars;
+        document.getElementById(elementId).textContent = `⭐ ${stars}`;
+    } catch (error) {
+        console.error(`Error fetching GitHub stars for ${repo}:`, error);
+        document.getElementById(elementId).textContent = '⭐ Error';
     }
+}
 
-    // 在页面加载时调用函数
-    document.addEventListener('DOMContentLoaded', () => {
-        fetchHuggingFaceDownloads('infly/INF-34B-Base', 'inf-34b-downloads');
-        fetchGitHubStars('infly-ai/INF-LLM', 'inf-llm-stars');
-        fetchGitHubStars('infly-ai/INF-LLM', 'inf-llm-2-stars');
-        fetchGitHubStars('Bumble666/Hyper_MoE', 'hyper-moe-stars');
-        fetchGitHubStars('mutonix/RefGPT', 'ref-gpt-stars');
-        fetchGitHubStars('MikeGu721/XiezhiBenchmark', 'xiezhi-benchmark-stars');
-        fetchGitHubStars('WaitHZ/GW-MoE', 'gw-moe-stars');
-        fetchGitHubStars('kamanphoebe/Look-into-MoEs', 'look-into-moes-stars');
-        fetchGitHubStars('multimodal-art-projection/MAP-NEO', 'map-neo-stars');
-        fetchGitHubStars('sanderwood/bgpt', 'bgpt-stars');
-        fetchGitHubStars('geekan/MetaGPT', 'metagpt-stars');
-        fetchGitHubStars('RuifengYuan/Prefix_Merging', 'Prefix-Merging-stars');
-        fetchGitHubStars('RuifengYuan/Sentence-Fusion-with-event-graph', 'sentence-Fusion-with-event-graph-stars');
-        fetchGitHubStars('RuifengYuan/FactExsum-coling2020', 'factExsum-coling2020-stars');
-    });
+// 获取Hugging Face模型的下载次数
+async function fetchHuggingFaceDownloads(model, elementId) {
+    try {
+        const response = await fetch(`https://huggingface.co/api/models/${model}`);
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        const downloads = data.downloads || 0;
+        document.getElementById(elementId).textContent = `⬇️ ${downloads}`;
+    } catch (error) {
+        console.error(`Error fetching Hugging Face downloads for ${model}:`, error);
+        document.getElementById(elementId).textContent = '⬇️ Error';
+    }
+}
+
+// 批量获取GitHub仓库的星标数
+function fetchMultipleGitHubStars(repos) {
+    repos.forEach(({ repo, elementId }) => fetchGitHubStars(repo, elementId));
+}
+
+// 在页面加载时调用函数
+document.addEventListener('DOMContentLoaded', () => {
+    fetchHuggingFaceDownloads('infly/INF-34B-Base', 'inf-34b-downloads');
+    
+    const githubRepos = [
+        { repo: 'infly-ai/INF-LLM', elementId: 'inf-llm-stars' },
+        { repo: 'infly-ai/INF-LLM', elementId: 'inf-llm-2-stars' },
+        { repo: 'Bumble666/Hyper_MoE', elementId: 'hyper-moe-stars' },
+        { repo: 'mutonix/RefGPT', elementId: 'ref-gpt-stars' },
+        { repo: 'MikeGu721/XiezhiBenchmark', elementId: 'xiezhi-benchmark-stars' },
+        { repo: 'WaitHZ/GW-MoE', elementId: 'gw-moe-stars' },
+        { repo: 'kamanphoebe/Look-into-MoEs', elementId: 'look-into-moes-stars' },
+        { repo: 'multimodal-art-projection/MAP-NEO', elementId: 'map-neo-stars' },
+        { repo: 'sanderwood/bgpt', elementId: 'bgpt-stars' },
+        { repo: 'geekan/MetaGPT', elementId: 'metagpt-stars' },
+        { repo: 'RuifengYuan/Prefix_Merging', elementId: 'Prefix-Merging-stars' },
+        { repo: 'RuifengYuan/Sentence-Fusion-with-event-graph', elementId: 'sentence-Fusion-with-event-graph-stars' },
+        { repo: 'RuifengYuan/FactExsum-coling2020', elementId: 'factExsum-coling2020-stars' }
+    ];
+    
+    fetchMultipleGitHubStars(githubRepos);
+});
+
 </script>
 
 
