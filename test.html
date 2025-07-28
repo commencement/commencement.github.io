@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GitHub Stars Test</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <h1>GitHub Stars Test</h1>
+    
+    <div>
+        <p>INF-LLM Stars: <span id="inf-llm-stars">Loading...</span></p>
+        <p>MetaGPT Stars: <span id="metagpt-stars">Loading...</span></p>
+        <p>Hyper_MoE Stars: <span id="hyper-moe-stars">Loading...</span></p>
+    </div>
+
+    <script>
+    // 缓存GitHub仓库的星标数
+    const githubStarsCache = {};
+
+    // 获取GitHub仓库的星标数（使用公共API，无需token）
+    async function fetchGitHubStars(repo, elementId) {
+        try {
+            if (githubStarsCache[repo]) {
+                document.getElementById(elementId).textContent = `⭐ ${githubStarsCache[repo]}`;
+                return;
+            }
+            
+            console.log(`Fetching stars for ${repo}...`);
+            
+            const response = await fetch(`https://api.github.com/repos/${repo}`, {
+                headers: {
+                    'Accept': 'application/vnd.github.v3+json',
+                    'User-Agent': 'Mozilla/5.0 (compatible; GitHub-Stars-Fetcher)'
+                }
+            });
+            
+            if (!response.ok) {
+                if (response.status === 403) {
+                    console.log(`Rate limited for ${repo}`);
+                    document.getElementById(elementId).textContent = '⭐ ~';
+                    return;
+                }
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            
+            const data = await response.json();
+            const stars = data.stargazers_count;
+            githubStarsCache[repo] = stars;
+            console.log(`${repo}: ${stars} stars`);
+            document.getElementById(elementId).textContent = `⭐ ${stars}`;
+        } catch (error) {
+            console.error(`Error fetching GitHub stars for ${repo}:`, error);
+            document.getElementById(elementId).textContent = '⭐ Error';
+        }
+    }
+
+    // 批量获取GitHub仓库的星标数
+    async function fetchMultipleGitHubStars(repos) {
+        for (let i = 0; i < repos.length; i++) {
+            const { repo, elementId } = repos[i];
+            await fetchGitHubStars(repo, elementId);
+            // 添加延迟避免GitHub API限流
+            if (i < repos.length - 1) {
+                await new Promise(resolve => setTimeout(resolve, 1000));
+            }
+        }
+    }
+
+    // 在页面加载时调用函数
+    document.addEventListener('DOMContentLoaded', () => {
+        console.log('Page loaded, fetching GitHub stars...');
+        
+        const githubRepos = [
+            { repo: 'infly-ai/INF-LLM', elementId: 'inf-llm-stars' },
+            { repo: 'geekan/MetaGPT', elementId: 'metagpt-stars' },
+            { repo: 'Bumble666/Hyper_MoE', elementId: 'hyper-moe-stars' }
+        ];
+        
+        fetchMultipleGitHubStars(githubRepos);
+    });
+    </script>
+</body>
+</html> 
