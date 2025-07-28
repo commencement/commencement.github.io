@@ -56,47 +56,212 @@
     }
 
     body {
-      font-size: 18px; /* Increase base font size */
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-size: 18px;
       line-height: 1.6;
-      margin: 0; /* Remove default margin */
+      margin: 0;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
     }
 
-#content {
-    max-width: 4000px; /* 设置内容最大宽度为1200px */
-    margin: 0 auto; /* 居中对齐内容 */
-    padding: 20px; /* 添加填充以增加内部间距 */
-}
+    #content {
+      max-width: 1000px;
+      margin: 0 auto;
+      background-color: white;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      backdrop-filter: blur(10px);
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
 
+    .header-section {
+      text-align: center;
+      margin-bottom: 40px;
+      padding-bottom: 30px;
+      border-bottom: 3px solid #667eea;
+    }
+
+    .profile-image {
+      border-radius: 50%;
+      border: 4px solid #667eea;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    .name-title {
+      font-size: 2.5em;
+      font-weight: 700;
+      color: #2c3e50;
+      margin: 20px 0 10px 0;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .bio {
+      font-size: 1.1em;
+      line-height: 1.8;
+      color: #555;
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: justify;
+    }
 
     h2 {
-      font-size: 24px;
-      font-weight: bold;
+      color: #2c3e50;
+      border-bottom: 3px solid #667eea;
+      padding-bottom: 15px;
+      margin-top: 40px;
+      margin-bottom: 25px;
+      font-size: 1.8em;
+      font-weight: 600;
+      text-align: center;
+      position: relative;
+    }
+
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, #667eea, #764ba2);
+      border-radius: 2px;
     }
 
     .highlight {
-      background-color: #ffeb3b;
-      padding: 10px;
-      border-radius: 5px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 15px;
+      border-radius: 10px;
       font-weight: bold;
       display: inline-block;
       margin: 20px 0;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
     }
 
     .model-info {
-      background-color: #e0f7fa;
-      padding: 15px;
-      border-radius: 5px;
-      margin: 20px 0;
-      font-size: 18px; /* Increase font size */
+      margin-bottom: 25px;
+      padding: 20px;
+      border-left: 5px solid #667eea;
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      border-radius: 10px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      font-size: 18px;
+    }
+
+    .model-info:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+    }
+
+    .model-info p {
+      margin: 8px 0;
+      line-height: 1.7;
+      color: #444;
+    }
+
+    .model-info strong {
+      color: #2c3e50;
+      font-size: 1.1em;
     }
 
     .model-info a {
-      color: #00796b;
+      color: #667eea;
       font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    .model-info a:hover {
+      color: #5a6fd8;
     }
 
     table {
-      width: 100%; /* Ensure tables take full width */
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 25px;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+
+    td {
+      padding: 15px;
+      border-bottom: 1px solid #eee;
+      transition: background-color 0.3s ease;
+    }
+
+    tr:hover td {
+      background-color: #f8f9fa;
+    }
+
+    .left {
+      width: 80px;
+      text-align: center;
+      vertical-align: top;
+      padding-top: 15px;
+    }
+
+    .title {
+      font-weight: bold;
+      color: #2c3e50;
+      font-size: 1.05em;
+    }
+
+    a {
+      color: #667eea;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    a:hover {
+      color: #5a6fd8;
+      text-decoration: underline;
+    }
+
+    .professional-services {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 25px;
+      border-radius: 15px;
+      margin: 30px 0;
+      text-align: center;
+    }
+
+    .professional-services h2 {
+      color: white;
+      border-bottom: 2px solid rgba(255,255,255,0.3);
+      margin-top: 0;
+    }
+
+    .professional-services h2::after {
+      background: rgba(255,255,255,0.5);
+    }
+
+    .stats-container {
+      text-align: center;
+      margin: 30px 0;
+      padding: 20px;
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      border-radius: 15px;
+      border: 2px solid #667eea;
+    }
+
+    .stats-number {
+      font-size: 2em;
+      font-weight: bold;
+      color: #667eea;
+      margin: 10px 0;
+    }
+
+    .stats-label {
+      color: #666;
+      font-size: 1.1em;
     }
 
     td {
@@ -193,6 +358,7 @@ async function fetchMultipleGitHubStars(repos) {
 document.addEventListener('DOMContentLoaded', () => {
     fetchHuggingFaceDownloads('infly/INF-34B-Base', 'inf-34b-downloads');
     fetchHuggingFaceDownloads('opencoder-llm/opencoder-llm', 'opencoder-downloads');
+    fetchHuggingFaceDownloads('m-a-p/neo_7b', 'neo-downloads');
     
     const githubRepos = [
         { repo: 'stepfun-ai/Step3', elementId: 'step3-stars' },
@@ -271,24 +437,6 @@ document.addEventListener('DOMContentLoaded', () => {
       <h2 style="CLEAR: both;">Recent Projects</h2>
 
       <div class="model-info">
-        <p><strong>Step3: Cost-Effective Multimodal Intelligence</strong></p>
-        <p>Step3 is our cutting-edge multimodal reasoning model—built on a massive Mixture-of-Experts architecture with 321 billion total parameters and 38 billion active. It is designed end-to-end to minimize decoding costs while delivering top-tier performance in vision–language reasoning, mathematics, and code. Through the co-design of Multi-Matrix Factorization Attention (MFA) and Attention-FFN Disaggregation (AFD), Step3 maintains exceptional efficiency across both flagship and low-end accelerators.</p>
-        <p>Links:
-          <a href="https://github.com/stepfun-ai/Step3" target="_blank">
-            <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub" style="width: 16px; height: 16px; vertical-align: middle;"> GitHub
-          </a> 
-          <span id="step3-stars"></span>
-          |
-          <a href="https://stepfun.com/" target="_blank">
-            <img src="https://cdn-icons-png.flaticon.com/512/1006/1006771.png" alt="Project Page" style="width: 16px; height: 16px; vertical-align: middle;"> Project Page
-          </a>
-          |
-          <a href="https://arxiv.org/abs/2507.19427" target="_blank">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" alt="Paper" style="width: 16px; height: 16px; vertical-align: middle;"> Paper
-          </a>
-        </p>
-      </div>
-      <div class="model-info">
         <p><strong>OpenCoder: The Open Cookbook for Top-Tier Code Large Language Models</strong></p>
         <p>OpenCoder is an open and reproducible code LLM family which includes 1.5B and 8B base and chat models, supporting both English and Chinese languages. Starting from scratch, OpenCoder is trained on 2.5 trillion tokens composed of 90% raw code and 10% code-related web data, reaching the performance of top-tier code LLMs. We provide not only model weights and inference code, but also the reproducible training data, the complete data processing pipeline, rigorous experimental ablation results, and detailed training protocols.</p>
         <p>Links:
@@ -307,6 +455,25 @@ document.addEventListener('DOMContentLoaded', () => {
           </a>
           |
           <a href="https://arxiv.org/pdf/2411.04905" target="_blank">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" alt="Paper" style="width: 16px; height: 16px; vertical-align: middle;"> Paper
+          </a>
+        </p>
+      </div>
+
+      <div class="model-info">
+        <p><strong>Step3: Cost-Effective Multimodal Intelligence</strong></p>
+        <p>Step3 is our cutting-edge multimodal reasoning model—built on a massive Mixture-of-Experts architecture with 321 billion total parameters and 38 billion active. It is designed end-to-end to minimize decoding costs while delivering top-tier performance in vision–language reasoning, mathematics, and code. Through the co-design of Multi-Matrix Factorization Attention (MFA) and Attention-FFN Disaggregation (AFD), Step3 maintains exceptional efficiency across both flagship and low-end accelerators.</p>
+        <p>Links:
+          <a href="https://github.com/stepfun-ai/Step3" target="_blank">
+            <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub" style="width: 16px; height: 16px; vertical-align: middle;"> GitHub
+          </a> 
+          <span id="step3-stars"></span>
+          |
+          <a href="https://stepfun.com/" target="_blank">
+            <img src="https://cdn-icons-png.flaticon.com/512/1006/1006771.png" alt="Project Page" style="width: 16px; height: 16px; vertical-align: middle;"> Project Page
+          </a>
+          |
+          <a href="https://arxiv.org/abs/2507.19427" target="_blank">
             <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" alt="Paper" style="width: 16px; height: 16px; vertical-align: middle;"> Paper
           </a>
         </p>
@@ -333,7 +500,25 @@ document.addEventListener('DOMContentLoaded', () => {
         </p>
       </div>
 
-
+      <div class="model-info">
+        <p><strong>NEO: Highly Capable and Transparent Bilingual Large Language Model Series</strong></p>
+        <p>NEO is a completely open source large language model, including code, all model weights, datasets used for training, and training details. The model series includes various sizes from 250M to 7B parameters, with different variants for base, instruction-tuned, and supervised fine-tuning versions. NEO is trained on a massive bilingual corpus and demonstrates strong performance across multiple domains.</p>
+        <p>Links:
+          <a href="https://github.com/multimodal-art-projection/MAP-NEO" target="_blank">
+            <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub" style="width: 16px; height: 16px; vertical-align: middle;"> GitHub
+          </a> 
+          <span id="map-neo-stars"></span>
+          |
+          <a href="https://huggingface.co/m-a-p/neo_7b" target="_blank">
+            <img src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg" alt="HuggingFace" style="width: 16px; height: 16px; vertical-align: middle;"> HuggingFace
+          </a> 
+          <span id="neo-downloads"></span>
+          |
+          <a href="https://arxiv.org/abs/2405.19327" target="_blank">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" alt="Paper" style="width: 16px; height: 16px; vertical-align: middle;"> Paper
+          </a>
+        </p>
+      </div>
 
       <h2 style="CLEAR: both">Large Language Model Pretraining Related Publications </h2>
       </br>
@@ -342,8 +527,8 @@ document.addEventListener('DOMContentLoaded', () => {
         <tbody>
                <tr>
                 <td class="left">
-                    <a href="https://s.infly.cn/f/img/pdf/inf_34b_tech_report.pdf" target="_blank">
-                        <img src="./images/pdf.png" width="25" height="25"><br>pdf
+                    <a href="https://arxiv.org/abs/2405.19327" target="_blank">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" width="25" height="25"><br>arXiv
                     </a>
                 </td>
                 <td>
@@ -359,7 +544,7 @@ document.addEventListener('DOMContentLoaded', () => {
                   <tr>
                 <td class="left">
                     <a href="https://arxiv.org/pdf/2405.19327" target="_blank">
-                        <img src="./images/pdf.png" width="25" height="25"><br>pdf
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" width="25" height="25"><br>arXiv
                     </a>
                 </td>
                 <td>
@@ -374,7 +559,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <tr>
                 <td class="left">
                     <a href="https://arxiv.org/pdf/2402.12656" target="_blank">
-                        <img src="./images/pdf.png" width="25" height="25"><br>pdf
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" width="25" height="25"><br>arXiv
                     </a>
                 </td>
                 <td>
@@ -389,7 +574,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <tr>
                 <td class="left">
                     <a href="https://arxiv.org/pdf/2305.14994.pdf" target="_blank">
-                        <img src="./images/pdf.png" width="25" height="25"><br>pdf
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" width="25" height="25"><br>arXiv
                     </a>
                 </td>
                 <td>
@@ -404,7 +589,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <tr>
                 <td class="left">
                     <a href="https://arxiv.org/pdf/2306.05783.pdf" target="_blank">
-                        <img src="./images/pdf.png" width="25" height="25"><br>pdf
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" width="25" height="25"><br>arXiv
                     </a>
                 </td>
                 <td>
@@ -419,7 +604,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <tr>
                 <td class="left">
                     <a href="https://arxiv.org/abs/2406.12375" target="_blank">
-                        <img src="./images/pdf.png" width="25" height="25"><br>pdf
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" width="25" height="25"><br>arXiv
                     </a>
                 </td>
                 <td>
@@ -433,7 +618,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <tr>
                 <td class="left">
                     <a href="https://arxiv.org/pdf/2406.18219" target="_blank">
-                        <img src="./images/pdf.png" width="25" height="25"><br>pdf
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" width="25" height="25"><br>arXiv
                     </a>
                 </td>
                 <td>
@@ -448,7 +633,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <tr>
                 <td class="left">
                     <a href="https://arxiv.org/pdf/2312.17257" target="_blank">
-                        <img src="./images/pdf.png" width="25" height="25"><br>pdf
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" width="25" height="25"><br>arXiv
                     </a>
                 </td>
                 <td>
@@ -468,7 +653,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <tbody>
           </br>
           <tr>
-            <td class="left"><a href="https://arxiv.org/abs/2402.19155" target="_blank"><img src="./images/pdf.png" width="25" height="25"><br>pdf</a></td>
+            <td class="left"><a href="https://arxiv.org/abs/2402.19155" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" width="25" height="25"><br>arXiv</a></td>
             <td><span class="title">Beyond Language Models: Byte Models are Digital World Simulators</span> 
               <br>Shangda Wu, Xu Tan, <b>Zili Wang</b>, Rui Wang, Xiaobing Li, Maosong Sun
               <!-- <br>&nbsp;&nbsp;&bull; <a href="https://arxiv.org/abs/2402.19155" target="_blank">arXiv</a> &nbsp;&nbsp; -->
@@ -478,7 +663,7 @@ document.addEventListener('DOMContentLoaded', () => {
           </tr>
 
           <tr>
-            <td class="left"><a href="https://arxiv.org/pdf/2406.07588" target="_blank"><img src="./images/pdf.png" width="25" height="25"><br>pdf</a></td>
+            <td class="left"><a href="https://arxiv.org/pdf/2406.07588" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" width="25" height="25"><br>arXiv</a></td>
             <td><span class="title">AIM: Let Any Multi-modal Large Language Models Embrace Efficient In-Context Learning</span> 
               <br>Jun Gao, Qian Qiao, Ziqiang Cao, <b>Zili Wang</b>, Wenjie Li
               <!-- <br>&nbsp;&nbsp;&bull; <a href="https://arxiv.org/abs/2406.07588" target="_blank">arXiv</a> &nbsp;&nbsp; -->
@@ -493,7 +678,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <table>
         <tbody>
           <tr>
-            <td class="left"><a href="https://arxiv.org/pdf/2308.00352.pdf" target="_blank"><img src="./images/pdf.png" width="25" height="25"><br>pdf</a></td>
+            <td class="left"><a href="https://arxiv.org/pdf/2308.00352.pdf" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" width="25" height="25"><br>arXiv</a></td>
             <td><span class="title">Metagpt: Meta programming for multi-agent collaborative framework</span> 
               <br>Sirui Hong, Xiawu Zheng, Jonathan Chen, Yuheng Cheng, Jinlin Wang, Ceyao Zhang, <b>Zili Wang</b>, Steven Ka Shing Yau, Zijuan Lin, Liyang Zhou, Chenyu Ran, Lingfeng Xiao, Chenglin Wu
               <br>ICLR 2024
@@ -509,7 +694,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <tbody>
           <tr>
             <tr>
-              <td class="left"><a href="https://ojs.aaai.org/index.php/AAAI/article/view/29836" target="_blank"><img src="./images/pdf.png" width="25" height="25"><br>pdf</a></td>
+              <td class="left"><a href="https://ojs.aaai.org/index.php/AAAI/article/view/29836" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" width="25" height="25"><br>arXiv</a></td>
               <td><span class="title">QuerySum: A Multi-Document Query-Focused Summarization Dataset</span> 
                 <br>Yushan Liu, <b>Zili Wang</b>, Ruifeng Yuan
                 <br>AAAI 2024
@@ -519,7 +704,7 @@ document.addEventListener('DOMContentLoaded', () => {
             </tr>
 
             <tr>
-              <td class="left"><a href="https://ojs.aaai.org/index.php/AAAI/article/view/26631" target="_blank"><img src="./images/pdf.png" width="25" height="25"><br>pdf</a></td>
+              <td class="left"><a href="https://ojs.aaai.org/index.php/AAAI/article/view/26631" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" width="25" height="25"><br>arXiv</a></td>
               <td><span class="title">Preserve Context Information through Interpretability for Extract-Generate Long-Input Summarization Framework</span> 
                 <br>Ruifeng Yuan,  <b>Zili Wang</b>,  Ziqiang Cao, Wenjie Li
                 <br>AAAI 2023
@@ -529,7 +714,7 @@ document.addEventListener('DOMContentLoaded', () => {
             </tr>
 
             <tr>
-              <td class="left"><a href="https://arxiv.org/pdf/2211.16164.pdf" target="_blank"><img src="./images/pdf.png" width="25" height="25"><br>pdf</a></td>
+              <td class="left"><a href="https://arxiv.org/pdf/2211.16164.pdf" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" width="25" height="25"><br>arXiv</a></td>
               <td><span class="title">Few-shot Query-Focused Summarization with Prefix-Merging</span> 
                 <br>Ruifeng Yuan,  <b>Zili Wang</b>,  Wenjie Li
                 <br>EMNLP 2022
@@ -539,7 +724,7 @@ document.addEventListener('DOMContentLoaded', () => {
             </tr>
 
             <tr>
-              <td class="left"><a href="https://aclanthology.org/2021.emnlp-main.334.pdf" target="_blank"><img src="./images/pdf.png" width="25" height="25"><br>pdf</a></td>
+              <td class="left"><a href="https://aclanthology.org/2021.emnlp-main.334.pdf" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" width="25" height="25"><br>arXiv</a></td>
               <td><span class="title">Event Graph based Sentence Fusion</span> 
                 <br>Ruifeng Yuan*,  <b>Zili Wang</b>*<b>(Equal Contribution)</b>,  Wenjie Li
                 <br>EMNLP 2021 
@@ -549,7 +734,7 @@ document.addEventListener('DOMContentLoaded', () => {
             </tr>
 
             <tr>
-              <td class="left"><a href="files/Fact-level Extractive Summarization withHierarchical Graph Mask on BERT.pdf" target="_blank"><img src="./images/pdf.png" width="25" height="25"><br>pdf</a></td>
+              <td class="left"><a href="files/Fact-level Extractive Summarization withHierarchical Graph Mask on BERT.pdf" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" width="25" height="25"><br>arXiv</a></td>
               <td><span class="title">Fact level Extractive Summarization with Hierarchical Graph Mask on BERT</span> 
                 <br>Ruifeng Yuan,  <b>Zili Wang</b>,  Wenjie Li
                 <br>COLING 2020 
@@ -559,7 +744,7 @@ document.addEventListener('DOMContentLoaded', () => {
             </tr>
 
             <tr>
-              <td class="left"><a href="files/CIKM_2020_Tip_Generation.pdf" target="_blank"><img src="./images/pdf.png" width="25" height="25"><br>pdf</a></td>
+              <td class="left"><a href="files/CIKM_2020_Tip_Generation.pdf" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" width="25" height="25"><br>arXiv</a></td>
               <td><span class="title">Query-aware Tip Generation for Vertical Search</span> 
                 <br>Yang Yang*, Junmei Hao*, Canjia Li*, <b>Zili Wang</b>*<b>(Equal Contribution)</b>, Jingang Wang, Fuzheng Zhang, Rao Fu, Peixu Hou, Gong Zhang, Zhongyuan Wang
                 <br>CIKM 2020 
@@ -572,19 +757,28 @@ document.addEventListener('DOMContentLoaded', () => {
         </tbody>
       </table>
 
-      <b> Look for the full publication list? Please see <a href="" target="_blank">my CV</a> or visit <a href="https://scholar.google.com/citations?hl=zh-CN&user=E9zWgmwAAAAJ" target="_blank">Google Scholar</a>.</b></br></br>
 
-      <h2 style="CLEAR: both;">Professional Services</h2>
-      <br>
-      Program Committee Member of <span class="title">ACM CIKM (2023) </span> <br>
-      Program Committee Member of <span class="title">ACM CIKM (2022) </span> <br>
-      Program Committee Member of <span class="title">ACM CIKM (2021) </span> <br>
+
+      <div class="professional-services">
+        <h2 style="CLEAR: both;">Professional Services</h2>
+        <br>
+        Program Committee Member of <span class="title">AAAI (2026) </span> <br>
+        Program Committee Member of <span class="title">ACM CIKM (2025) </span> <br>
+        Reviewer of <span class="title">ACL (2025, 2024) </span> <br>
+        Reviewer of <span class="title">NeurIPS </span> <br>
+        Program Committee Member of <span class="title">ACM CIKM (2023) </span> <br>
+        Program Committee Member of <span class="title">ACM CIKM (2022) </span> <br>
+        Program Committee Member of <span class="title">ACM CIKM (2021) </span> <br>
+      </div>
       </td></tr></tbody></table>
 
       </br>
 
-      <h2 style="CLEAR: both;"></h2>
-      <script type='text/javascript' id='clustrmaps' src='//cdn.clustrmaps.com/map_v2.js?cl=080808&w=300&t=tt&d=P5t3EabrzZY8aFh3ZhuRPAXXUh7jCpV3TVHKUlqbMjA&co=ffffff&cmo=3acc3a&cmn=ff5353&ct=808080'></script>
+      <div class="stats-container">
+        <div class="stats-number">37,586</div>
+        <div class="stats-label">Total Page Views</div>
+        <p style="margin-top: 15px; color: #888; font-size: 0.9em;">Thank you for visiting my homepage!</p>
+      </div>
     </div>
   </div>
 </body>
