@@ -192,6 +192,7 @@ async function fetchMultipleGitHubStars(repos) {
 // 在页面加载时调用函数
 document.addEventListener('DOMContentLoaded', () => {
     fetchHuggingFaceDownloads('infly/INF-34B-Base', 'inf-34b-downloads');
+    fetchHuggingFaceDownloads('opencoder-llm/opencoder-llm', 'opencoder-downloads');
     
     const githubRepos = [
         { repo: 'stepfun-ai/Step3', elementId: 'step3-stars' },
@@ -287,6 +288,30 @@ document.addEventListener('DOMContentLoaded', () => {
           </a>
         </p>
       </div>
+      <div class="model-info">
+        <p><strong>OpenCoder: The Open Cookbook for Top-Tier Code Large Language Models</strong></p>
+        <p>OpenCoder is an open and reproducible code LLM family which includes 1.5B and 8B base and chat models, supporting both English and Chinese languages. Starting from scratch, OpenCoder is trained on 2.5 trillion tokens composed of 90% raw code and 10% code-related web data, reaching the performance of top-tier code LLMs. We provide not only model weights and inference code, but also the reproducible training data, the complete data processing pipeline, rigorous experimental ablation results, and detailed training protocols.</p>
+        <p>Links:
+          <a href="https://github.com/opencoder-llm/opencoder-llm" target="_blank">
+            <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub" style="width: 16px; height: 16px; vertical-align: middle;"> GitHub
+          </a> 
+          <span id="opencoder-stars"></span>
+          |
+          <a href="https://huggingface.co/opencoder-llm" target="_blank">
+            <img src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg" alt="HuggingFace" style="width: 16px; height: 16px; vertical-align: middle;"> HuggingFace
+          </a> 
+          <span id="opencoder-downloads"></span>
+          |
+          <a href="https://opencoder-llm.github.io/" target="_blank">
+            <img src="https://cdn-icons-png.flaticon.com/512/1006/1006771.png" alt="Project Page" style="width: 16px; height: 16px; vertical-align: middle;"> Project Page
+          </a>
+          |
+          <a href="https://arxiv.org/pdf/2411.04905" target="_blank">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" alt="Paper" style="width: 16px; height: 16px; vertical-align: middle;"> Paper
+          </a>
+        </p>
+      </div>
+
 
       <div class="model-info">
         <p><strong>INF-34B: INF’s Open-Source Large Language Models</strong></p>
@@ -308,28 +333,7 @@ document.addEventListener('DOMContentLoaded', () => {
         </p>
       </div>
 
-      <div class="model-info">
-        <p><strong>OpenCoder: The Open Cookbook for Top-Tier Code Large Language Models</strong></p>
-        <p>OpenCoder is an open and reproducible code LLM family which includes 1.5B and 8B base and chat models, supporting both English and Chinese languages. Starting from scratch, OpenCoder is trained on 2.5 trillion tokens composed of 90% raw code and 10% code-related web data, reaching the performance of top-tier code LLMs. We provide not only model weights and inference code, but also the reproducible training data, the complete data processing pipeline, rigorous experimental ablation results, and detailed training protocols.</p>
-        <p>Links:
-          <a href="https://github.com/opencoder-llm/opencoder-llm" target="_blank">
-            <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub" style="width: 16px; height: 16px; vertical-align: middle;"> GitHub
-          </a> 
-          <span id="opencoder-stars"></span>
-          |
-          <a href="https://huggingface.co/opencoder-llm" target="_blank">
-            <img src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg" alt="HuggingFace" style="width: 16px; height: 16px; vertical-align: middle;"> HuggingFace
-          </a>
-          |
-          <a href="https://opencoder-llm.github.io/" target="_blank">
-            <img src="https://cdn-icons-png.flaticon.com/512/1006/1006771.png" alt="Project Page" style="width: 16px; height: 16px; vertical-align: middle;"> Project Page
-          </a>
-          |
-          <a href="https://arxiv.org/pdf/2411.04905" target="_blank">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" alt="Paper" style="width: 16px; height: 16px; vertical-align: middle;"> Paper
-          </a>
-        </p>
-      </div>
+
 
       <h2 style="CLEAR: both">Large Language Model Pretraining Related Publications </h2>
       </br>
