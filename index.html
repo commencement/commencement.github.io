@@ -296,12 +296,12 @@ async function fetchGitHubStars(repo, elementId) {
         }
         
         // 使用公共API，添加随机延迟避免限流
-        await new Promise(resolve => setTimeout(resolve, Math.random() * 1000));
+        await new Promise(resolve => setTimeout(resolve, Math.random() * 2000 + 1000));
         
         const response = await fetch(`https://api.github.com/repos/${repo}`, {
             headers: {
                 'Accept': 'application/vnd.github.v3+json',
-                'User-Agent': 'Mozilla/5.0 (compatible; GitHub-Stars-Fetcher)'
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
             }
         });
         
@@ -328,14 +328,30 @@ async function fetchGitHubStars(repo, elementId) {
 // 获取Hugging Face模型的下载次数
 async function fetchHuggingFaceDownloads(model, elementId) {
     try {
-        const response = await fetch(`https://huggingface.co/api/models/${model}`);
+        console.log(`Fetching downloads for ${model}...`);
+        
+        // 添加延迟避免限流
+        await new Promise(resolve => setTimeout(resolve, Math.random() * 1000 + 500));
+        
+        const response = await fetch(`https://huggingface.co/api/models/${model}`, {
+            headers: {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+            }
+        });
+        
         if (!response.ok) {
+            if (response.status === 429) {
+                console.log(`Rate limited for ${model}`);
+                document.getElementById(elementId).textContent = '⬇️ ~';
+                return;
+            }
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
         
         const data = await response.json();
         const downloads = data.downloads || 0;
-        document.getElementById(elementId).textContent = `⬇️ ${downloads}`;
+        console.log(`${model}: ${downloads} downloads`);
+        document.getElementById(elementId).textContent = `⬇️ ${downloads.toLocaleString()}`;
     } catch (error) {
         console.error(`Error fetching Hugging Face downloads for ${model}:`, error);
         document.getElementById(elementId).textContent = '⬇️ ~';
@@ -373,9 +389,8 @@ document.addEventListener('DOMContentLoaded', () => {
         { repo: 'multimodal-art-projection/MAP-NEO', elementId: 'map-neo-stars' },
         { repo: 'sanderwood/bgpt', elementId: 'bgpt-stars' },
         { repo: 'geekan/MetaGPT', elementId: 'metagpt-stars' },
-        { repo: 'RuifengYuan/Prefix_Merging', elementId: 'Prefix-Merging-stars' },
-        { repo: 'RuifengYuan/Sentence-Fusion-with-event-graph', elementId: 'sentence-Fusion-with-event-graph-stars' },
-        { repo: 'RuifengYuan/FactExsum-coling2020', elementId: 'factExsum-coling2020-stars' }
+        { repo: 'RuifengYuan/Evolving-LLM-Assistant', elementId: 'evolving-llm-stars' }
+
     ];
     
     fetchMultipleGitHubStars(githubRepos);
@@ -431,7 +446,7 @@ document.addEventListener('DOMContentLoaded', () => {
       </table>
 
       <div style="margin-top:20px;">
-        Zili Wang is currently an LLM Researcher at <a href="https://stepfun.com/">StepFun</a> (October 2024 - Present), focusing on large language model pretraining, particularly leading the Step3 project. Previously, he worked as an Algorithm Expert at <a href="https://www.infly.cn/">INF Technology</a> (September 2023 - September 2024), an Algorithm Engineer at Xiaohongshu Inc. (March 2022 - September 2023) with <a href="https://wangshusen.github.io/">Prof. Shusen Wang</a>, and a Research Assistant at Hong Kong Polytechnic University (February 2020 - March 2022) with <a href="https://www4.comp.polyu.edu.hk/~cswjli/">Prof. Wenjie Li</a>.
+        Zili Wang is currently an LLM Researcher at <a href="https://stepfun.com/">StepFun</a> (October 2024 - Present), focusing on large language model pretraining, particularly leading the Step3 project, supervised by <a href="https://scholar.google.com/citations?user=yuB-cfoAAAAJ&hl=zh-CN">Prof. Yu Bai</a>. Previously, he worked as an Algorithm Expert at <a href="https://www.infly.cn/">INF Technology</a> (September 2023 - September 2024), an Algorithm Engineer at Xiaohongshu Inc. (March 2022 - September 2023) with <a href="https://wangshusen.github.io/">Prof. Shusen Wang</a>, and a Research Assistant at Hong Kong Polytechnic University (February 2020 - March 2022) with <a href="https://www4.comp.polyu.edu.hk/~cswjli/">Prof. Wenjie Li</a>.
       </div>
 
       <h2 style="CLEAR: both;">Recent Projects</h2>
@@ -520,7 +535,7 @@ document.addEventListener('DOMContentLoaded', () => {
         </p>
       </div>
 
-      <h2 style="CLEAR: both">Large Language Model Pretraining Related Publications </h2>
+      <h2 style="CLEAR: both">Selected Publications</h2>
       </br>
 
       <table>
@@ -541,20 +556,7 @@ document.addEventListener('DOMContentLoaded', () => {
             </tr>
 
 
-                  <tr>
-                <td class="left">
-                    <a href="https://arxiv.org/pdf/2405.19327" target="_blank">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" width="25" height="25"><br>arXiv
-                    </a>
-                </td>
-                <td>
-                    <span class="title">Map-neo: Highly capable and transparent bilingual large language model series</span>
-                    <br>Ge Zhang, Scott Qu, Jiaheng Liu, Chenchen Zhang, Chenghua Lin, Chou Leuang Yu, Danny Pan, Esther Cheng, Jie Liu, Qunshu Lin, Raven Yuan, Tuney Zheng, Wei Pang, Xinrun Du, Yiming Liang, Yinghao Ma, Yizhi Li, Ziyang Ma, Bill Lin, Emmanouil Benetos, Huan Yang, Junting Zhou, Kaijing Ma, Minghao Liu, Morry Niu, Noah Wang, Quehry Que, Ruibo Liu, Sine Liu, Shawn Guo, Soren Gao, Wangchunshu Zhou, Xinyue Zhang, Yizhi Zhou, Yubo Wang, Yuelin Bai, Yuhan Zhang, Yuxiang Zhang, <b>Zenith Wang</b>, Zhenzhu Yang, Zijian Zhao, Jiajun Zhang, Wanli Ouyang, Wenhao Huang, Wenhu Chen
-                    <!-- <br>&nbsp;&nbsp;&bull; <a href="https://arxiv.org/abs/2405.19327" target="_blank">arXiv</a> &nbsp;&nbsp; -->
-                    <br>&bull; <a href="https://github.com/multimodal-art-projection/MAP-NEO" target="_blank">Github</a> <span id="map-neo-stars"></span> &nbsp;&nbsp;
 
-                </td>
-            </tr>
 
             <tr>
                 <td class="left">
@@ -640,7 +642,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <span class="title">Evolving Large Language Model Assistant with Long-Term Conditional Memory</span>
                     <br>Ruifeng Yuan, Shichao Sun, <b>Zili Wang</b>, Ziqiang Cao, Wenjie Li
                     <!-- <br>&nbsp;&nbsp;&bull; <a href="https://arxiv.org/pdf/2312.17257" target="_blank">arXiv</a> &nbsp;&nbsp; -->
-                    <br>&bull; <a href="https://arxiv.org/pdf/2312.17257" target="_blank">Github</a> &nbsp;&nbsp;
+                    <br>&bull; <a href="https://github.com/RuifengYuan/Evolving-LLM-Assistant" target="_blank">Github</a> <span id="evolving-llm-stars"></span> &nbsp;&nbsp;
                 </td>
             </tr>
 
@@ -648,114 +650,8 @@ document.addEventListener('DOMContentLoaded', () => {
         </tbody>
       </table>
 
-      <h2 style="CLEAR: both">Multimodal model Related Publications </h2>
-      <table>
-        <tbody>
-          </br>
-          <tr>
-            <td class="left"><a href="https://arxiv.org/abs/2402.19155" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" width="25" height="25"><br>arXiv</a></td>
-            <td><span class="title">Beyond Language Models: Byte Models are Digital World Simulators</span> 
-              <br>Shangda Wu, Xu Tan, <b>Zili Wang</b>, Rui Wang, Xiaobing Li, Maosong Sun
-              <!-- <br>&nbsp;&nbsp;&bull; <a href="https://arxiv.org/abs/2402.19155" target="_blank">arXiv</a> &nbsp;&nbsp; -->
-              <br>&bull; <a href="https://github.com/sanderwood/bgpt" target="_blank">Github</a> <span id="bgpt-stars"></span> &nbsp;&nbsp;
 
-            </td>
-          </tr>
 
-          <tr>
-            <td class="left"><a href="https://arxiv.org/pdf/2406.07588" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" width="25" height="25"><br>arXiv</a></td>
-            <td><span class="title">AIM: Let Any Multi-modal Large Language Models Embrace Efficient In-Context Learning</span> 
-              <br>Jun Gao, Qian Qiao, Ziqiang Cao, <b>Zili Wang</b>, Wenjie Li
-              <!-- <br>&nbsp;&nbsp;&bull; <a href="https://arxiv.org/abs/2406.07588" target="_blank">arXiv</a> &nbsp;&nbsp; -->
-              <br>&bull; <a href="https://commencement.github.io/" target="_blank">Github</a> &nbsp;&nbsp;
-
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <h2 style="CLEAR: both">LLM-based Agent Related  Publications </h2>
-      <table>
-        <tbody>
-          <tr>
-            <td class="left"><a href="https://arxiv.org/pdf/2308.00352.pdf" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" width="25" height="25"><br>arXiv</a></td>
-            <td><span class="title">Metagpt: Meta programming for multi-agent collaborative framework</span> 
-              <br>Sirui Hong, Xiawu Zheng, Jonathan Chen, Yuheng Cheng, Jinlin Wang, Ceyao Zhang, <b>Zili Wang</b>, Steven Ka Shing Yau, Zijuan Lin, Liyang Zhou, Chenyu Ran, Lingfeng Xiao, Chenglin Wu
-              <br>ICLR 2024
-              <!-- <br>&nbsp;&nbsp;&bull; <a href="https://arxiv.org/abs/2308.00352" target="_blank">arXiv</a> &nbsp;&nbsp; -->
-              <br>&bull; <a href="https://github.com/geekan/MetaGPT" target="_blank">Github</a> <span id="metagpt-stars"></span>&nbsp;&nbsp;
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <h2 style="CLEAR: both">Text Summarization Related  Publications </h2>
-      <table>
-        <tbody>
-          <tr>
-            <tr>
-              <td class="left"><a href="https://ojs.aaai.org/index.php/AAAI/article/view/29836" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" width="25" height="25"><br>arXiv</a></td>
-              <td><span class="title">QuerySum: A Multi-Document Query-Focused Summarization Dataset</span> 
-                <br>Yushan Liu, <b>Zili Wang</b>, Ruifeng Yuan
-                <br>AAAI 2024
-                <!-- <br>&nbsp;&nbsp;&bull; <a href="https://ojs.aaai.org/index.php/AAAI/article/view/29836" target="_blank">arXiv</a> &nbsp;&nbsp; -->
-                <br>&bull; <a href="" target="_blank">Github</a> &nbsp;&nbsp;
-              </td>
-            </tr>
-
-            <tr>
-              <td class="left"><a href="https://ojs.aaai.org/index.php/AAAI/article/view/26631" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" width="25" height="25"><br>arXiv</a></td>
-              <td><span class="title">Preserve Context Information through Interpretability for Extract-Generate Long-Input Summarization Framework</span> 
-                <br>Ruifeng Yuan,  <b>Zili Wang</b>,  Ziqiang Cao, Wenjie Li
-                <br>AAAI 2023
-                <!-- <br>&nbsp;&nbsp;&bull; <a href="https://ojs.aaai.org/index.php/AAAI/article/view/26631" target="_blank">arXiv</a> &nbsp;&nbsp; -->
-                <br>&bull; <a href="https://commencement.github.io/" target="_blank">Github</a> &nbsp;&nbsp;
-              </td>
-            </tr>
-
-            <tr>
-              <td class="left"><a href="https://arxiv.org/pdf/2211.16164.pdf" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" width="25" height="25"><br>arXiv</a></td>
-              <td><span class="title">Few-shot Query-Focused Summarization with Prefix-Merging</span> 
-                <br>Ruifeng Yuan,  <b>Zili Wang</b>,  Wenjie Li
-                <br>EMNLP 2022
-                <!-- <br>&nbsp;&nbsp;&bull; <a href="https://arxiv.org/abs/2211.16164" target="_blank">arXiv</a> &nbsp;&nbsp; -->
-                <br>&bull; <a href="https://github.com/RuifengYuan/Prefix_Merging" target="_blank">Github</a> <span id="Prefix-Merging-stars"></span>&nbsp;&nbsp;
-              </td>
-            </tr>
-
-            <tr>
-              <td class="left"><a href="https://aclanthology.org/2021.emnlp-main.334.pdf" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" width="25" height="25"><br>arXiv</a></td>
-              <td><span class="title">Event Graph based Sentence Fusion</span> 
-                <br>Ruifeng Yuan*,  <b>Zili Wang</b>*<b>(Equal Contribution)</b>,  Wenjie Li
-                <br>EMNLP 2021 
-                <!-- <br>&nbsp;&nbsp;&bull; <a href="https://aclanthology.org/2021.emnlp-main.334.pdf" target="_blank">arXiv</a> &nbsp;&nbsp; -->
-                <br>&bull; <a href="https://github.com/RuifengYuan/Sentence-Fusion-with-event-graph" target="_blank">Github</a> <span id="sentence-fusion-with-event-graph-stars"></span>&nbsp;&nbsp;
-              </td>
-            </tr>
-
-            <tr>
-              <td class="left"><a href="files/Fact-level Extractive Summarization withHierarchical Graph Mask on BERT.pdf" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" width="25" height="25"><br>arXiv</a></td>
-              <td><span class="title">Fact level Extractive Summarization with Hierarchical Graph Mask on BERT</span> 
-                <br>Ruifeng Yuan,  <b>Zili Wang</b>,  Wenjie Li
-                <br>COLING 2020 
-                <!-- <br>&nbsp;&nbsp;&bull; <a href="https://arxiv.org/abs/2011.09739" target="_blank">arXiv</a> &nbsp;&nbsp; -->
-                <br>&bull; <a href="https://github.com/RuifengYuan/FactExsum-coling2020" target="_blank">Github</a> &nbsp;&nbsp;
-              </td>
-            </tr>
-
-            <tr>
-              <td class="left"><a href="files/CIKM_2020_Tip_Generation.pdf" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" width="25" height="25"><br>arXiv</a></td>
-              <td><span class="title">Query-aware Tip Generation for Vertical Search</span> 
-                <br>Yang Yang*, Junmei Hao*, Canjia Li*, <b>Zili Wang</b>*<b>(Equal Contribution)</b>, Jingang Wang, Fuzheng Zhang, Rao Fu, Peixu Hou, Gong Zhang, Zhongyuan Wang
-                <br>CIKM 2020 
-                <!-- <br>&nbsp;&nbsp;&bull; <a href="https://arxiv.org/abs/2010.09254" target="_blank">arXiv</a> &nbsp;&nbsp; -->
-                <br>&bull; <a href="https://commencement.github.io/" target="_blank">Github</a> &nbsp;&nbsp;
-                &bull; <a href="files/cikm-tip-generation.pdf" target="_blank">Slides</a> &nbsp;&nbsp;
-              </td>
-            </tr>
-          </tr>
-        </tbody>
-      </table>
 
 
 
