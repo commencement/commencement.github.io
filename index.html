@@ -194,6 +194,7 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchHuggingFaceDownloads('infly/INF-34B-Base', 'inf-34b-downloads');
     
     const githubRepos = [
+        { repo: 'stepfun-ai/Step3', elementId: 'step3-stars' },
         { repo: 'infly-ai/INF-LLM', elementId: 'inf-llm-stars' },
         { repo: 'infly-ai/INF-LLM', elementId: 'inf-llm-2-stars' },
         { repo: 'opencoder-llm/opencoder-llm', elementId: 'opencoder-stars' },
@@ -243,7 +244,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 </p>
                 <p style="margin-left:0px;">
                   <!-- <a href="http://www.nextcenter.org/", target="_blank">NExT++</a><br/> -->
-                  <a href="https://www.infly.cn/" target="_blank">INF Technology</a><br/>
+                  <a href="https://stepfun.com/" target="_blank">StepFun</a><br/>
                   <!-- <a href="https://www.polyu.edu.hk/", target="_blank">Hong Kong Polytechnic University</a><br/> -->
                 </p>
                 <p style="margin-left:0px;">
@@ -263,10 +264,29 @@ document.addEventListener('DOMContentLoaded', () => {
       </table>
 
       <div style="margin-top:20px;">
-        Zili Wang is currently an Algorithm Expert at <a href="https://www.infly.cn/">INF Technology</a>, focusing on large language model pretraining. Previously, he worked as an Algorithm Engineer at Xiaohongshu Inc. (March 2022 - September 2023) with <a href="https://wangshusen.github.io/">Prof. Shusen Wang</a>. He was a Research Intern at Microsoft Asia (October 2020 - February 2021) under Xueting Han, and a Research Assistant at Hong Kong Polytechnic University since February 2020 with <a href="https://www4.comp.polyu.edu.hk/~cswjli/">Prof. Wenjie Li</a>. He also interned at Meituan-Dianping's AI Lab (June 2019 - November 2019) with <a href="https://sites.google.com/site/bitwjg/">Dr. Jingang Wang</a> and <a href="https://zhfzhmsra.github.io/">Dr. Fuzheng Zhang</a>, and at Peking University (October 2018 - May 2019) with <a href="https://xusun26.github.io/">Prof. Xu Sun</a>.
+        Zili Wang is currently an LLM Researcher at <a href="https://stepfun.com/">StepFun</a> (October 2024 - Present), focusing on large language model pretraining, particularly leading the Step3 project. Previously, he worked as an Algorithm Expert at <a href="https://www.infly.cn/">INF Technology</a> (September 2023 - September 2024), an Algorithm Engineer at Xiaohongshu Inc. (March 2022 - September 2023) with <a href="https://wangshusen.github.io/">Prof. Shusen Wang</a>. He was a Research Intern at Microsoft Asia (October 2020 - February 2021) under Xueting Han, and a Research Assistant at Hong Kong Polytechnic University since February 2020 with <a href="https://www4.comp.polyu.edu.hk/~cswjli/">Prof. Wenjie Li</a>. He also interned at Meituan-Dianping's AI Lab (June 2019 - November 2019) with <a href="https://sites.google.com/site/bitwjg/">Dr. Jingang Wang</a> and <a href="https://zhfzhmsra.github.io/">Dr. Fuzheng Zhang</a>, and at Peking University (October 2018 - May 2019) with <a href="https://xusun26.github.io/">Prof. Xu Sun</a>.
       </div>
 
       <h2 style="CLEAR: both;">Recent Projects</h2>
+
+      <div class="model-info">
+        <p><strong>Step3: Cost-Effective Multimodal Intelligence</strong></p>
+        <p>Step3 is our cutting-edge multimodal reasoning model—built on a massive Mixture-of-Experts architecture with 321 billion total parameters and 38 billion active. It is designed end-to-end to minimize decoding costs while delivering top-tier performance in vision–language reasoning, mathematics, and code. Through the co-design of Multi-Matrix Factorization Attention (MFA) and Attention-FFN Disaggregation (AFD), Step3 maintains exceptional efficiency across both flagship and low-end accelerators.</p>
+        <p>Links:
+          <a href="https://github.com/stepfun-ai/Step3" target="_blank">
+            <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub" style="width: 16px; height: 16px; vertical-align: middle;"> GitHub
+          </a> 
+          <span id="step3-stars"></span>
+          |
+          <a href="https://stepfun.com/" target="_blank">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" alt="Project Page" style="width: 16px; height: 16px; vertical-align: middle;"> Project Page
+          </a>
+          |
+          <a href="https://arxiv.org/abs/2507.19427" target="_blank">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" alt="Paper" style="width: 16px; height: 16px; vertical-align: middle;"> Paper
+          </a>
+        </p>
+      </div>
 
       <div class="model-info">
         <p><strong>INF-34B: INF’s Open-Source Large Language Models</strong></p>
