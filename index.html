@@ -119,12 +119,10 @@
   </style>
 
 <script>
-const GITHUB_API_KEY = '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'; // 替换为你的GitHub API key
-
 // 缓存GitHub仓库的星标数
 const githubStarsCache = {};
 
-// 获取GitHub仓库的星标数
+// 获取GitHub仓库的星标数（使用公共API，无需token）
 async function fetchGitHubStars(repo, elementId) {
     try {
         if (githubStarsCache[repo]) {
@@ -132,12 +130,22 @@ async function fetchGitHubStars(repo, elementId) {
             return;
         }
         
+        // 使用公共API，添加随机延迟避免限流
+        await new Promise(resolve => setTimeout(resolve, Math.random() * 1000));
+        
         const response = await fetch(`https://api.github.com/repos/${repo}`, {
             headers: {
-                'Authorization': `token ${GITHUB_API_KEY}`
+                'Accept': 'application/vnd.github.v3+json',
+                'User-Agent': 'Mozilla/5.0 (compatible; GitHub-Stars-Fetcher)'
             }
         });
+        
         if (!response.ok) {
+            if (response.status === 403) {
+                // 如果遇到限流，显示默认值
+                document.getElementById(elementId).textContent = '⭐ ~';
+                return;
+            }
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
         
@@ -147,7 +155,8 @@ async function fetchGitHubStars(repo, elementId) {
         document.getElementById(elementId).textContent = `⭐ ${stars}`;
     } catch (error) {
         console.error(`Error fetching GitHub stars for ${repo}:`, error);
-        document.getElementById(elementId).textContent = '⭐ Error';
+        // 显示默认值而不是Error
+        document.getElementById(elementId).textContent = '⭐ ~';
     }
 }
 
@@ -164,13 +173,20 @@ async function fetchHuggingFaceDownloads(model, elementId) {
         document.getElementById(elementId).textContent = `⬇️ ${downloads}`;
     } catch (error) {
         console.error(`Error fetching Hugging Face downloads for ${model}:`, error);
-        document.getElementById(elementId).textContent = '⬇️ Error';
+        document.getElementById(elementId).textContent = '⬇️ ~';
     }
 }
 
-// 批量获取GitHub仓库的星标数
-function fetchMultipleGitHubStars(repos) {
-    repos.forEach(({ repo, elementId }) => fetchGitHubStars(repo, elementId));
+// 批量获取GitHub仓库的星标数（添加延迟避免限流）
+async function fetchMultipleGitHubStars(repos) {
+    for (let i = 0; i < repos.length; i++) {
+        const { repo, elementId } = repos[i];
+        await fetchGitHubStars(repo, elementId);
+        // 添加延迟避免GitHub API限流
+        if (i < repos.length - 1) {
+            await new Promise(resolve => setTimeout(resolve, 1000 + Math.random() * 2000));
+        }
+    }
 }
 
 // 在页面加载时调用函数
